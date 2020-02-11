@@ -1,0 +1,9 @@
+# Secrets
+.secrets
+
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
