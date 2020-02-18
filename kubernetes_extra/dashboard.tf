@@ -27,7 +27,7 @@ resource "kubernetes_cluster_role_binding" "kubernetes_dashboard" {
   subject {
     kind      = "ServiceAccount"
     name      = "kubernetes-dashboard"
-    namespace = "kubernetes-dashboard"
+    namespace = "kube-system"
   }
 
   role_ref {
