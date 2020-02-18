@@ -1,0 +1,34 @@
+terraform {
+  backend "remote" {
+    hostname = "app.terraform.io"
+    organization = "hacphan"
+
+    workspaces {
+      prefix = "eks-extra-"
+    }
+  }
+}
+
+locals {
+  environment = "${lookup(var.workspace_to_environment_map, terraform.workspace, "")}"
+}
+
+provider "aws" {
+  profile    = local.environment
+  region     = var.region
+}
+
+provider "kubernetes" {
+  host                   = data.aws_eks_cluster.main.endpoint
+  cluster_ca_certificate = base64decode(data.aws_eks_cluster.main.certificate_authority.0.data)
+  token                  = data.aws_eks_cluster_auth.main.token
+  load_config_file       = false
+}
+
+provider "helm" {
+  kubernetes {
+    host                   = data.aws_eks_cluster.main.endpoint
+    cluster_ca_certificate = base64decode(data.aws_eks_cluster.main.certificate_authority.0.data)
+    token                  = data.aws_eks_cluster_auth.main.token
+  }
+}

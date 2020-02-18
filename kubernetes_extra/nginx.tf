@@ -1,23 +1,28 @@
-# resource "helm_release" "ingress" {
-#   name       = "${var.prefix}-ingress"
-#   repository = "stable"
-#   chart      = "nginx-ingress"
-#
-#   set {
-#     name  = "controller.service.enabled"
-#     value = "true"
-#   }
-#
-#   set {
-#     name  = "controller.publishService.enabled"
-#     value = "true"
-#   }
-#
-#   set {
-#     name  = "controller.metrics.enabled"
-#     value = "true"
-#   }
-# }
+resource "helm_release" "ingress" {
+  name       = "${var.prefix}-ingress"
+  repository = "stable"
+  chart      = "nginx-ingress"
+
+  set {
+    name  = "controller.service.enabled"
+    value = "true"
+  }
+
+  set {
+    name  = "controller.publishService.enabled"
+    value = "true"
+  }
+
+  set {
+    name  = "controller.metrics.enabled"
+    value = "true"
+  }
+
+  set {
+    name  = "rbac.create"
+    value = "true"
+  }
+}
 
 # resource "kubernetes_secret" "tls" {
 #   metadata {
