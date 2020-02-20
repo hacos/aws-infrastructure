@@ -8,8 +8,8 @@ variable "region" {
 }
 
 variable "vpc_id" {}
-variable "main_subnet_id" {}
-variable "cluster_subnet_id" {}
+variable "cluster_primary_subnet_id" {}
+variable "cluster_secondary_subnet_id" {}
 
 # Maps
 variable "workspace_to_environment_map" {
@@ -20,7 +20,7 @@ variable "workspace_to_environment_map" {
   }
 }
 
-# Used for aws_auth.tf
+# Used in auth.tf
 variable "wait_for_cluster_cmd" {
   description = "Custom local-exec command to execute for determining if the eks cluster is healthy. Cluster endpoint will be available as an environment variable called ENDPOINT"
   type        = string

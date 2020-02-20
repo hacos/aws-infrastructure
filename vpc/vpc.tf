@@ -36,7 +36,12 @@ resource "aws_route_table_association" "main" {
   route_table_id = aws_route_table.main.id
 }
 
-resource "aws_route_table_association" "cluster" {
-  subnet_id      = aws_subnet.cluster.id
+resource "aws_route_table_association" "cluster_primary" {
+  subnet_id      = aws_subnet.cluster_primary.id
+  route_table_id = aws_route_table.main.id
+}
+
+resource "aws_route_table_association" "cluster_secondary" {
+  subnet_id      = aws_subnet.cluster_secondary.id
   route_table_id = aws_route_table.main.id
 }

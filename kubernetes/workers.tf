@@ -92,7 +92,7 @@ resource "aws_eks_node_group" "primary" {
   cluster_name    = aws_eks_cluster.main.name
   node_group_name = "primary"
   node_role_arn   = aws_iam_role.workers.arn
-  subnet_ids      = [data.aws_subnet.main.id, data.aws_subnet.cluster.id]
+  subnet_ids      = [data.aws_subnet.cluster_primary.id, data.aws_subnet.cluster_secondary.id]
 
   scaling_config {
     desired_size  = 1

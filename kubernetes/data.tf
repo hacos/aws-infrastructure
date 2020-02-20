@@ -2,12 +2,12 @@ data "aws_vpc" "main" {
   id = var.vpc_id
 }
 
-data "aws_subnet" "main" {
-  id = var.main_subnet_id
+data "aws_subnet" "cluster_primary" {
+  id = var.cluster_primary_subnet_id
 }
 
-data "aws_subnet" "cluster" {
-  id = var.cluster_subnet_id
+data "aws_subnet" "cluster_secondary" {
+  id = var.cluster_secondary_subnet_id
 }
 
 data "http" "ip" {
@@ -42,12 +42,4 @@ data "aws_iam_policy_document" "workers_assume_role_policy" {
       identifiers = ["ec2.amazonaws.com"]
     }
   }
-}
-
-data "aws_eks_cluster" "main" {
-  name = "${var.prefix}-${local.environment}"
-}
-
-data "aws_eks_cluster_auth" "main" {
-  name = "${var.prefix}-${local.environment}"
 }
