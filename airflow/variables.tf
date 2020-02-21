@@ -1,6 +1,5 @@
-# Globals
 variable "prefix" {
-  default = "vpc"
+  default = "airflow"
 }
 
 variable "region" {

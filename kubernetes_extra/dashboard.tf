@@ -19,6 +19,7 @@ resource "helm_release" "dashboard" {
     value = "true"
   }
 }
+
 resource "kubernetes_cluster_role_binding" "kubernetes_dashboard" {
   metadata {
     name      = "kubernetes-dashboard"

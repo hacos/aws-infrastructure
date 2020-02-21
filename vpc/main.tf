@@ -17,3 +17,6 @@ provider "aws" {
   profile    = local.environment
   region     = var.region
 }
+
+data "aws_region" "current" {}
+data "aws_availability_zones" "available" {}

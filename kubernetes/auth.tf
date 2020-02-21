@@ -30,31 +30,31 @@ ROLES
   depends_on = [null_resource.wait_for_cluster]
 }
 
-resource "kubernetes_service_account" "tiller" {
-  metadata {
-    name      = "tiller"
-    namespace = "kube-system"
-  }
-
-  depends_on = [null_resource.wait_for_cluster]
-}
-
-resource "kubernetes_cluster_role_binding" "tiller" {
-  metadata {
-    name = "tiller"
-  }
-
-  subject {
-    kind      = "ServiceAccount"
-    namespace = "kube-system"
-    name      = "tiller"
-  }
-
-  role_ref {
-    api_group = "rbac.authorization.k8s.io"
-    kind      = "ClusterRole"
-    name      = "cluster-admin"
-  }
-
-  depends_on = [null_resource.wait_for_cluster]
-}
+# resource "kubernetes_service_account" "tiller" {
+#   metadata {
+#     name      = "tiller"
+#     namespace = "kube-system"
+#   }
+#
+#   depends_on = [null_resource.wait_for_cluster]
+# }
+#
+# resource "kubernetes_cluster_role_binding" "tiller" {
+#   metadata {
+#     name = "tiller"
+#   }
+#
+#   subject {
+#     kind      = "ServiceAccount"
+#     namespace = "kube-system"
+#     name      = "tiller"
+#   }
+#
+#   role_ref {
+#     api_group = "rbac.authorization.k8s.io"
+#     kind      = "ClusterRole"
+#     name      = "cluster-admin"
+#   }
+#
+#   depends_on = [null_resource.wait_for_cluster]
+# }

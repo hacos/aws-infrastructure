@@ -11,6 +11,7 @@ terraform {
 
 locals {
   environment = "${lookup(var.workspace_to_environment_map, terraform.workspace, "")}"
+  root_domain = "${lookup(var.workspace_to_root_domain_map, terraform.workspace, "")}"
 }
 
 provider "aws" {

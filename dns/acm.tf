@@ -1,5 +1,5 @@
 resource "aws_acm_certificate" "main" {
-  domain_name       = "hacphan.com"
+  domain_name       = "*.${local.root_domain}"
   validation_method = "DNS"
 
   tags = {

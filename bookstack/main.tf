@@ -4,7 +4,7 @@ terraform {
     organization = "hacphan"
 
     workspaces {
-      prefix = "eks-extra-"
+      prefix = "bookstack-"
     }
   }
 }

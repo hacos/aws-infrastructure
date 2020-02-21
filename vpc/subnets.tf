@@ -16,6 +16,7 @@ resource "aws_subnet" "main" {
 resource "aws_subnet" "cluster_primary" {
   cidr_block        = local.cluster_primary_cidr_block
   vpc_id            = aws_vpc.main.id
+  availability_zone = data.aws_availability_zones.available.names[1]
 
   tags = {
     environment = local.environment
@@ -25,6 +26,7 @@ resource "aws_subnet" "cluster_primary" {
 resource "aws_subnet" "cluster_secondary" {
   cidr_block        = local.cluster_secondary_cidr_block
   vpc_id            = aws_vpc.main.id
+  availability_zone = data.aws_availability_zones.available.names[2]
 
   tags = {
     environment = local.environment
