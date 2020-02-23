@@ -6,6 +6,10 @@ variable "region" {
   default = "us-west-2"
 }
 
+variable "sendgrid_api_key" {
+  default = "null"
+}
+
 # Maps
 variable "workspace_to_environment_map" {
   type = map(string)

@@ -1,3 +1,44 @@
 env: {
-  APP_URL: "https://docs.${ROOT_DOMAIN}"
+  APP_URL: "https://docs.${ROOT_DOMAIN}",
+
+  MAIL_DRIVER: "smtp",
+  MAIL_FROM: "hac@${ROOT_DOMAIN}",
+  MAIL_FROM_NAME: BookStack,
+
+  MAIL_HOST: "smtp.sendgrid.net",
+  MAIL_PORT: 587,
+  MAIL_USERNAME: "apikey",
+  MAIL_PASSWORD: "${SENDGRID_API_KEY}",
+  MAIL_ENCRYPTION: "tls"
+
+  # See https://www.bookstackapp.com/docs/admin/upload-config/
+  STORAGE_TYPE: "s3"
+  STORAGE_S3_KEY: "${STORAGE_S3_KEY}"
+  STORAGE_S3_SECRET: "${STORAGE_S3_SECRET}"
+  STORAGE_S3_BUCKET: "${STORAGE_S3_BUCKET}"
+  STORAGE_S3_REGION: "${REGION}"
 }
+
+externalDatabase:
+  ## Database host
+  host: ${DATABASE_HOST}
+
+  ## Database host
+  port: 3306
+
+  ## Database user
+  user: ${DATABASE_USER}
+
+  ## Database password
+  password: ${DATABASE_PASSWORD}
+
+  ## Database name
+  database: ${DATABASE_NAME}
+
+mariadb:
+  ## Whether to deploy a mariadb server to satisfy the applications database requirements. To use an external database set this to false and configure the externalDatabase parameters
+  enabled: false
+
+serviceAccount:
+  # Specifies whether a ServiceAccount should be created
+  create: false

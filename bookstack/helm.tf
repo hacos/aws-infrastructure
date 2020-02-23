@@ -13,19 +13,19 @@ resource "helm_release" "main" {
   # I couldn't figure out how to set the env JSON object here, so I had a file instead
   values = [
     templatefile("values.yaml", {
-      ROOT_DOMAIN = local.root_domain
+      ROOT_DOMAIN       = local.root_domain,
+      SENDGRID_API_KEY  = var.sendgrid_api_key,
+      DATABASE_HOST     = aws_db_instance.main.address,
+      DATABASE_USER     = var.prefix,
+      DATABASE_PASSWORD = random_password.password.result,
+      DATABASE_NAME     = var.prefix
+
+      STORAGE_S3_KEY    = aws_iam_access_key.main.id
+      STORAGE_S3_SECRET = aws_iam_access_key.main.secret
+      STORAGE_S3_BUCKET = aws_s3_bucket.main.id
+      STORAGE_S3_REGION = var.region
     })
   ]
-
-  # set {
-  #   name  = "persistence.uploads.existingClaim"
-  #   value = kubernetes_persistent_volume_claim.uploads.metadata.0.name
-  # }
-  #
-  # set {
-  #   name  = "persistence.storage.existingClaim"
-  #   value = kubernetes_persistent_volume_claim.storage.metadata.0.name
-  # }
 }
 
 resource "kubernetes_ingress" "main" {
