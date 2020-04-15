@@ -96,6 +96,10 @@ resource "aws_eks_node_group" "primary" {
 
   instance_types  = [ "t3.medium" ] # Default
 
+  labels = {
+    name = "primary"
+  }
+
   scaling_config {
     desired_size  = 1
     max_size      = 1
