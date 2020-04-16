@@ -1,5 +1,3 @@
-data "aws_elb_hosted_zone_id" "main" {}
-
 resource "aws_route53_record" "main" {
   zone_id = data.aws_route53_zone.main.zone_id
   name    = "docs.${local.root_domain}"

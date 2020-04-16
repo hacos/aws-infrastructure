@@ -1,4 +1,4 @@
-resource "kubernetes_namespace" "airflow" {
+resource "kubernetes_namespace" "main" {
   metadata {
     name = var.prefix
   }
