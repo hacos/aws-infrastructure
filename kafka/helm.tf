@@ -17,27 +17,8 @@ resource "random_password" "password" {
 resource "helm_release" "main" {
   namespace  = var.prefix
   name       = "${var.prefix}-${local.environment}"
-  repository = data.helm_repository.stable.metadata[0].name
+  repository = data.helm_repository.incubator.metadata[0].name
   chart      = var.prefix
-
-  set {
-    name  = "master.servicePort"
-    value = random_integer.port.result
-  }
-
-  set {
-    name  = "master.adminPassword"
-    value = random_password.password.result
-  }
-
-  set {
-    name  = "master.jenkinsUrlProtocol"
-    value = "https"
-  }
-
-  values = [
-    templatefile("values.yaml", {})
-  ]
 
   depends_on = [
     kubernetes_namespace.main,
