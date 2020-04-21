@@ -16,6 +16,11 @@ data "helm_repository" "incubator" {
   url  = "http://storage.googleapis.com/kubernetes-charts-incubator"
 }
 
+data "helm_repository" "bitnami" {
+  name = "bitnami"
+  url  = "https://charts.bitnami.com/bitnami"
+}
+
 data "aws_acm_certificate" "main" {
   domain   = "*.${local.root_domain}"
   statuses = ["ISSUED"]
@@ -27,3 +32,37 @@ data "aws_route53_zone" "main" {
 }
 
 data "aws_elb_hosted_zone_id" "main" {}
+
+data "kubernetes_service" "kafka" {
+  metadata {
+    namespace = var.prefix
+    name      =  "${var.prefix}-${local.environment}"
+  }
+
+  depends_on = [
+    helm_release.kafka,
+  ]
+}
+
+data "kubernetes_service" "manager" {
+  metadata {
+    namespace = var.prefix
+    name      =  "${var.prefix}-manager-${local.environment}"
+  }
+
+  depends_on = [
+    kubernetes_namespace.main,
+    helm_release.manager
+  ]
+}
+
+data "kubernetes_service" "zookeeper" {
+  metadata {
+    namespace = var.prefix
+    name      =  "${var.prefix}-${local.environment}-zookeeper"
+  }
+
+  depends_on = [
+    helm_release.kafka,
+  ]
+}

@@ -1,0 +1,7 @@
+zkHosts: "${ZKHOSTS}"
+
+clusters:
+  - name: "${ENVIRONMENT}"
+    zkHosts: "${ZKHOSTS}"
+    kafkaVersion: "2.0.0"
+    tuning: {}

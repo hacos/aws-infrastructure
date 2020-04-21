@@ -11,7 +11,7 @@ resource "kubernetes_ingress" "main" {
 
   spec {
     rule {
-      host = "jenkins.${local.root_domain}"
+      host = "${var.prefix}.${local.root_domain}"
 
       http {
         path {
